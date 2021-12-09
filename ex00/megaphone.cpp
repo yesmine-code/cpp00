@@ -33,6 +33,6 @@ int main(int ac, char **av)
         }
         i++;
     }
-    std::cout <<"\n";
+    std::endl (std::cout);
     return 0;
 }
