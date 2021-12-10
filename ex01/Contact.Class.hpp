@@ -23,7 +23,7 @@ class Contact{
 
     private:
 
-    std::string darkestSecret;
+    int index;
    
     public :
 
@@ -31,6 +31,8 @@ class Contact{
     std::string lastName;
     std::string nickName;
     std::string phoneNumber;
+    std::string darkestSecret;
+
 
     Contact(void);
     ~Contact(void);
