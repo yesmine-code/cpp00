@@ -12,9 +12,7 @@
 
 NAME	=	myphonebook
 
-SRCS	=	Contact.Class.cpp
-
-INCLUDE =	Contact.Class.hpp
+SRCS	=	Phonebook.Class.cpp 
 
 OBJS	=	${SRCS:.cpp=.o}
 
@@ -25,13 +23,13 @@ RM	=	rm -f
 CFLAGS	=	-Wall -Wextra -Werror
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c -I $(INCLUDE) $< -o ${<:.cpp=.o}
+	$(CC) $(CFLAGS) -c $< -o ${<:.cpp=.o}
 
 
 all:	${NAME}
 
 ${NAME}:	$(OBJS) 
-			$(CC) $(CFLAGS) -I $(INCLUDE) $(OBJS) -o $(NAME) 
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 		${RM} ${OBJS} 
