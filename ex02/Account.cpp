@@ -17,14 +17,19 @@
 #include <chrono>
 
 int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+
 
 Account::Account(int initial_deposit){
 
 	this->_amount = initial_deposit;
 	_accountIndex = _nbAccounts;
+	_nbAccounts++;
+	_totalAmount = _totalAmount + _amount;
 	_displayTimestamp();
 	std::cout <<" index:" <<_accountIndex <<";amount:" << _amount <<";created" << std::endl;
-	_nbAccounts++;
 }
 
 Account::~Account(){
@@ -34,14 +39,54 @@ Account::~Account(){
 }
 
 void Account::_displayTimestamp(){
+
 	time_t tt;
     time( &tt );
+	char buffer[18];
     tm TM = *localtime( &tt );
-
-	//Must add 1 to month and 1900 to the year
-    int month=TM.tm_mon+1;
-    int day=TM.tm_mday;
-    int year=TM.tm_year+1900;
-	std::cout <<"["<<year<<month<<day<<"_" <<TM.tm_hour<<TM.tm_min<<TM.tm_sec<<"]";
-
+	std::strftime(buffer, 18, "[%Y%m%d_%H%M%S]", &TM);
+	std::cout<<buffer;
 }
+
+void Account::displayAccountsInfos(void){
+
+	_displayTimestamp();
+	std::cout <<" accounts:"<<_nbAccounts<<";total:"<<_totalAmount<<";deposits:"<<_totalNbDeposits<<";withdrawals:"<<_totalNbWithdrawals<<std::endl;
+}
+
+void Account::displayStatus( void ) const{
+
+	_displayTimestamp();
+	std::cout <<" index:" <<_accountIndex <<";amount:" << _amount <<";deposits:"<<_nbDeposits<<";withdrawals:"<<_nbWithdrawals<<std::endl;
+}
+
+void Account::makeDeposit( int deposit ){
+
+	_nbDeposits++;
+	_displayTimestamp();
+	std::cout <<" index:" <<_accountIndex <<";p_amount:" << _amount <<";deposit:"<<deposit<<";amount:"<<_amount + deposit<<";nb_deposits:"<<_nbDeposits<<std::endl;
+	_amount = _amount + deposit;
+	_totalAmount = _totalAmount + deposit;
+	_totalNbDeposits++;
+}
+
+bool Account::makeWithdrawal( int withdrawal ){
+	
+	if (withdrawal <= _amount)
+	{
+		_nbWithdrawals++;
+		_totalNbWithdrawals++;
+		_totalAmount = _totalAmount - withdrawal;
+		_displayTimestamp();
+		std::cout <<" index:" <<_accountIndex <<";p_amount:" << _amount<<";withdrawal:"<<withdrawal<<";amount:"<<_amount - withdrawal<<";nb_withdrawals:"<<_nbWithdrawals<<std::endl;
+		_amount = _amount - withdrawal;
+		return true;
+	}
+	else
+	{
+		_displayTimestamp();
+		std::cout <<" index:" <<_accountIndex <<";p_amount:"<<_amount<<";withdrawal:refused"<<std::endl;
+		return false;
+	}
+}
+
