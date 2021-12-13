@@ -20,14 +20,21 @@ class Contact{
 	
 	private:
 
-	public:
-
 	int index;
 	std::string firstName;
     std::string lastName;
     std::string nickName;
     std::string phoneNumber;
     std::string darkestSecret;
+
+	public:
+	
+	int getIndex(void);
+	std::string getFirstName(void);
+	std::string getLastName(void);
+	std::string getNickName(void);
+	std::string getPhoneNumber(void);
+	std::string getDarkestSecret(void);
 
 	Contact(int index, std::string firstName, std::string lastName, std::string nickName, std::string phoneNumber, std::string darkestSecret){
 		this->index = index;

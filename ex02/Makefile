@@ -20,7 +20,7 @@ CC	=	clang++
 
 RM	=	rm -f
 
-CFLAGS	=	#-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o ${<:.cpp=.o}

@@ -31,11 +31,11 @@ Phonebook::~Phonebook(void){
 
 void Phonebook::printfContactByIndex(int index){
    
-    std::cout <<contacts[index]->firstName <<std::endl;
-    std::cout <<contacts[index]->lastName <<std::endl;
-    std::cout <<contacts[index]->nickName <<std::endl;
-    std::cout <<contacts[index]->phoneNumber <<std::endl;
-    std::cout <<contacts[index]->darkestSecret <<std::endl;
+    std::cout <<contacts[index]->getFirstName() <<std::endl;
+    std::cout <<contacts[index]->getLastName() <<std::endl;
+    std::cout <<contacts[index]->getNickName() <<std::endl;
+    std::cout <<contacts[index]->getPhoneNumber() <<std::endl;
+    std::cout <<contacts[index]->getDarkestSecret() <<std::endl;
 }
 
 void Phonebook::printname(std::string name)
@@ -74,9 +74,9 @@ void Phonebook::printAllContacts(void){
     while (i < contactNum)
     {
         std::cout <<"|         " <<i <<"|";
-        printname(contacts[i]->firstName);
-        printname(contacts[i]->lastName);
-        printname(contacts[i]->nickName);
+        printname(contacts[i]->getFirstName());
+        printname(contacts[i]->getLastName());
+        printname(contacts[i]->getNickName());
         std::cout <<std::endl;
         i++; 
     }

@@ -12,7 +12,7 @@
 
 NAME	=	myphonebook
 
-SRCS	=	Phonebook.Class.cpp 
+SRCS	=	Phonebook.Class.cpp Contact.Class.cpp
 
 OBJS	=	${SRCS:.cpp=.o}
 
