@@ -18,24 +18,16 @@ Phonebook::Phonebook(void){
 }
 
 Phonebook::~Phonebook(void){
-    int i;
-
-    i = 0;
-    while (i < contactNum)
-    {
-        delete(contacts[i]);
-        i++;
-    }
 	return ;
 }
 
 void Phonebook::printfContactByIndex(int index){
    
-    std::cout <<contacts[index]->getFirstName() <<std::endl;
-    std::cout <<contacts[index]->getLastName() <<std::endl;
-    std::cout <<contacts[index]->getNickName() <<std::endl;
-    std::cout <<contacts[index]->getPhoneNumber() <<std::endl;
-    std::cout <<contacts[index]->getDarkestSecret() <<std::endl;
+    std::cout <<contacts[index].getFirstName() <<std::endl;
+    std::cout <<contacts[index].getLastName() <<std::endl;
+    std::cout <<contacts[index].getNickName() <<std::endl;
+    std::cout <<contacts[index].getPhoneNumber() <<std::endl;
+    std::cout <<contacts[index].getDarkestSecret() <<std::endl;
 }
 
 void Phonebook::printname(std::string name)
@@ -74,9 +66,9 @@ void Phonebook::printAllContacts(void){
     while (i < contactNum)
     {
         std::cout <<"|         " <<i <<"|";
-        printname(contacts[i]->getFirstName());
-        printname(contacts[i]->getLastName());
-        printname(contacts[i]->getNickName());
+        printname(contacts[i].getFirstName());
+        printname(contacts[i].getLastName());
+        printname(contacts[i].getNickName());
         std::cout <<std::endl;
         i++; 
     }
@@ -97,8 +89,10 @@ void Phonebook::start(void){
       std::cin >> command;
       if (command.compare("ADD") == 0)
       {
-        if (contactNum == CONTACT_MAX || addContact(createContact(contactNum)) == false)
+        if (contactNum == CONTACT_MAX)
              std::cout <<"sorry!! no more than " <<CONTACT_MAX <<" contacts in this phonebook"<<std::endl;
+		else
+	        createContact(contactNum);
       }
       else if (command.compare("SEARCH") == 0)
       {
@@ -125,23 +119,7 @@ void Phonebook::start(void){
     }
 }
 
-bool Phonebook::addContact(Contact *c){
-    if (c != NULL && contactNum < CONTACT_MAX)
-    {
-        contacts[contactNum] = c;
-        contactNum++;
-        return true;
-    }
-    return false;
-}
-
-Contact *Phonebook::searchContact(int index){
-    if (index >= 0 && index < contactNum)
-	    return (contacts[index]);
-    return NULL;
-}
-
-Contact *Phonebook::createContact(int index){
+void Phonebook::createContact(int index){
 
 	std::string firstName;
     std::string lastName;
@@ -158,17 +136,19 @@ Contact *Phonebook::createContact(int index){
     std::cout <<"please enter NickName:" <<std::endl ;
     std::cin >>nickName;
 
-
     std::cout <<"please enter Phonenumber:" <<std::endl ;
     std::cin >>phoneNumber;
-
 
     std::cout <<"please enter DarkestSecret(shh ;) ):" <<std::endl ;
     std::cin >>darkestSecret;
 
-	Contact *c = new Contact(index, firstName, lastName, nickName, phoneNumber, darkestSecret);
-
-	return c;
+	contacts[index] = Contact();
+	contacts[index].setFirstName(firstName);
+	contacts[index].setLastName(lastName);
+	contacts[index].setNickName(nickName);
+	contacts[index].setPhoneNumber(phoneNumber);
+	contacts[index].setDarkestSecret(darkestSecret);
+	contactNum++;
 };
 
 int main(void)

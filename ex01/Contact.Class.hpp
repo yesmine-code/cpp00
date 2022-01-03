@@ -20,7 +20,6 @@ class Contact{
 	
 	private:
 
-	int index;
 	std::string firstName;
     std::string lastName;
     std::string nickName;
@@ -29,20 +28,20 @@ class Contact{
 
 	public:
 	
-	int getIndex(void);
 	std::string getFirstName(void);
+	void setFirstName(std::string firstName);
 	std::string getLastName(void);
+	void setLastName(std::string lastName);
 	std::string getNickName(void);
+	void setNickName(std::string nickName);
 	std::string getPhoneNumber(void);
+	void setPhoneNumber(std::string phoneNumber);
 	std::string getDarkestSecret(void);
+	void setDarkestSecret(std::string darkestSecret);
 
-	Contact(int index, std::string firstName, std::string lastName, std::string nickName, std::string phoneNumber, std::string darkestSecret){
-		this->index = index;
-		this->firstName = firstName;
-		this->lastName = lastName;
-		this->nickName = nickName;
-		this->phoneNumber = phoneNumber;
-		this->darkestSecret = darkestSecret;
+
+	Contact(){
+		return;
 	};
 	~Contact(void){
 		return;

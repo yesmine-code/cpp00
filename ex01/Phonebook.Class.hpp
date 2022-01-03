@@ -23,16 +23,16 @@ class Phonebook
 {
 private:
 public:
-	Contact *contacts[CONTACT_MAX];
+	Contact contacts[CONTACT_MAX];
 	int contactNum;
 
 	Phonebook();
 	~Phonebook();
 
 	void start(void);
-	Contact *createContact(int index);
-	Contact *searchContact(int index);
-	bool addContact(Contact *c);
+	void createContact(int index);
+	Contact searchContact(int index);
+	bool addContact(Contact c);
 	void printAllContacts(void);
 	void printname(std::string name);
 	void printfContactByIndex(int index);
